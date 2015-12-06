@@ -1,0 +1,1 @@
+%{"ex_ncurses": {:git, "https://github.com/jfreeze/ex_ncurses.git", "bb01e4a19b697aeba8d031d0baa99e73a374441d", []}}
