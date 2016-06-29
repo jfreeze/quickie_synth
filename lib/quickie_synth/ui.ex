@@ -1,7 +1,7 @@
 defmodule QuickieSynth.UI do
   alias QuickieSynth.Sound
   alias QuickieSynth.KeyboardMap
-  import ExNcurses
+  alias ExNcurses, as: N
 
   def main(_args) do
     start
@@ -10,29 +10,29 @@ defmodule QuickieSynth.UI do
   def start do
     initui()
     loop()
-    ex_endwin()
+    N.endwin()
   end
 
   def initui do
-    ncurses_begin()
-    ex_keypad()      # Enable support of Function Keys
-    ex_flushinp()    # clear input
+    N.n_begin()
+    N.keypad()      # Enable support of Function Keys
+    N.flushinp()    # clear input
     clear_key_note()
   end
 
   def clear_key_note() do
-    ex_mvprintw(11, 10, "F1 to exit")
-    ex_mvprintw(10, 10, "note:   ")
-    ex_mvprintw( 9, 10, "key:    ")
-    ex_mvprintw( 9, 10, "key: ")
+    N.mvprintw(11, 10, "F1 to exit")
+    N.mvprintw(10, 10, "note:   ")
+    N.mvprintw( 9, 10, "key:    ")
+    N.mvprintw( 9, 10, "key: ")
   end
 
   def loop() do
-    ex_noecho()
-    ex_flushinp()
-    ch = getchar()
+    N.noecho()
+    N.flushinp()
+    ch = N.getchar()
     process_char ch
-   if ch != fun(:F1), do: loop()
+   if ch != N.fun(:F1), do: loop()
   end
 
   def process_char(ch) do
@@ -43,11 +43,11 @@ defmodule QuickieSynth.UI do
         clear_key_note()
         :ok
       _ ->
-        ex_mvprintw(9, 10, "key:       ")
-        ex_mvprintw(9, 10, "key:  #{key}")
-        ex_mvprintw(10, 10, "note:        ")
-        ex_mvprintw(10, 10, "note: #{note}")
-        ex_refresh()
+        N.mvprintw(9, 10, "key:       ")
+        N.mvprintw(9, 10, "key:  #{key}")
+        N.mvprintw(10, 10, "note:        ")
+        N.mvprintw(10, 10, "note: #{note}")
+        N.refresh()
         spawn(Sound, :play, [note])
     end
   end
