@@ -15,7 +15,8 @@ defmodule QuickieSynth.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [mod: {QuickieSynth, []},
+     applications: [:ex_ncurses]]
   end
 
   # Dependencies can be Hex packages:
@@ -29,7 +30,8 @@ defmodule QuickieSynth.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:ex_ncurses, git: "https://github.com/jfreeze/ex_ncurses.git"}
+      {:ex_ncurses, git: "https://github.com/jfreeze/ex_ncurses.git"},
+      {:exrm, "~> 1.0.0"}
     ]
   end
 end
