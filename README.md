@@ -16,12 +16,13 @@ or
 Then, clone this repository and build the project:
 
     mix deps.get
-    mix build
+    mix release
 
 To start the ncurses UI for QuickieSynth, run:
 
-    mix start
+    rel/quickie_synth/bin/quickie_synth foreground
 
-This invokes `QuickieSynth.UI.start`. Type any key on the bottom two rows
-of the keyboard to play notes. Since ncurses takes control over the
-terminal, calling this from `iex -S mix` doesn't work well.
+This starts the `QuickieSynth` application and the `QuickieSynth.UI` `GenServer`.
+Type any key on the bottom two rows of the keyboard to play notes. Since ncurses
+takes control over the terminal, calling this from `iex -S mix` or starting a
+console on the release doesn't work.
